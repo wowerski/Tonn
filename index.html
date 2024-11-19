@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow: hidden;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .type-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .live-display {
+            position: absolute;
+            top: -40px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6f91;
+            min-width: 200px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .type-box input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-box input[type="text"]:focus {
+            border-color: #ff6f91;
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 111, 145, 0.5);
+        }
+
+        .type-box button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .type-box button:hover {
+            background: linear-gradient(135deg, #ff4e78, #ff7985);
+            box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .type-box button:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        .warning-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .warning-box h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #ff6f91;
+        }
+
+        .warning-box p {
+            margin: 0 0 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .warning-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .warning-box button:hover {
+            background: linear-gradient(135deg, #ff4e78, #ff7985);
+            box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+
+        .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff6f91;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+    </style>
+</head>
+<body>
+  <div class="type-box">
+    <img src="https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/462545363_875944664741358_1120148205063585882_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHvspYMgmxjaeEBmMyFR8u6sc8NyP514Fyxzw3I_nXgXELzGY-h6PakwuGDGz5OiZXx4kRacnyIrJ5Ib011C3M-&_nc_ohc=hYcgwTAyfp4Q7kNvgG47CKg&_nc_zt=23&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QF3Tm3ts1a1zt52Eg8pedbZbUGLZs5J2U1JLglRBO4Cmg&oe=67647B3A" alt="Profile Picture" class="profile-image">
+      <div class="live-display" id="live-display">Type something...</div>
+      <input type="text" placeholder="Type your name" id="text-input">
+      <button id="start-button">Start</button>
+  </div>
+
+  <div class="warning-box" id="warning-box">
+      <h2>Warning!</h2>
+      <p>You must type your name before clicking Start!</p>
+      <button id="close-warning">Close</button>
+  </div>
+
+  <script>
+      const startButton = document.getElementById('start-button');
+      const textInput = document.getElementById('text-input');
+      const warningBox = document.getElementById('warning-box');
+      const closeWarning = document.getElementById('close-warning');
+      const liveDisplay = document.getElementById('live-display');
+
+      // Smooth fade-out transition
+      const smoothTransition = () => {
+          document.body.style.opacity = '0';
+          setTimeout(() => {
+              // Redirect to we.html with the name as a URL parameter
+              window.location.href = `we.html?name=${encodeURIComponent(textInput.value.trim())}`;
+          }, 800); // Match the CSS transition duration
+      };
+
+      // Update live display with typed text
+      textInput.addEventListener('input', () => {
+          const value = textInput.value.trim();
+          liveDisplay.textContent = value ? value : 'Type something...';
+      });
+
+      startButton.addEventListener('click', function() {
+          if (textInput.value.trim() === '') {
+              warningBox.style.display = 'block';
+          } else {
+              smoothTransition();
+          }
+      });
+
+      closeWarning.addEventListener('click', function() {
+          warningBox.style.display = 'none';
+      });
+
+      window.addEventListener('click', function(event) {
+          if (event.target === warningBox) {
+              warningBox.style.display = 'none';
+          }
+      });
+  </script>
+</body>
+</html>

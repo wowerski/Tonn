@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            position: relative; /* Needed for positioning the History button */
+            overflow: hidden;
+        }
+
+        /* History button styling */
+        .history-button {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .history-button:hover {
+            background: linear-gradient(135deg, #ff4e78, #ff7985);
+            box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+        .history-button:active {
+            transform: translateX(-50%) translateY(1px);
+            box-shadow: none;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .text-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-top: 150px;
+        }
+
+        .text-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .big-text-input {
+            width: 90%;
+            height: 300px;  /* Adjust height */
+            font-size: 24px;  /* Adjust font size */
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ff6f91;
+            margin-bottom: 20px;
+            resize: none;  /* Prevent resizing */
+            overflow: hidden;  /* Prevent scroll */
+            text-align: center;
+            background: #fff;
+        }
+
+        .select-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .select-button:hover {
+            background: linear-gradient(135deg, #ff4e78, #ff7985);
+            box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .select-button:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        .warning-box,
+        .success-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .warning-box h2,
+        .success-box h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #ff6f91;
+        }
+
+        .warning-box p,
+        .success-box p {
+            margin: 0 0 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .warning-box button,
+        .success-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff6f91, #ff9a9e);
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .success-box h2 {
+            color: #4caf50;
+        }
+
+        .warning-box button:hover,
+        .success-box button:hover {
+            background: linear-gradient(135deg, #ff4e78, #ff7985);
+            box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .big-text-input {
+                height: 250px;
+                font-size: 20px;
+            }
+
+            .select-button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .big-text-input {
+                height: 200px;
+                font-size: 18px;
+            }
+
+            .select-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+
+        .profile-picture {
+    width: 120px; /* Adjust the size as needed */
+    height: 120px; /* Maintain a square ratio for circular styling */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the circle without distortion */
+    margin-bottom: -160px; /* Space between the image and the name display */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Optional shadow for styling */
+    border: 3px solid #ff6f91; /* Optional border color */
+}
+
+    </style>
+</head>
+<body>
+    <button class="history-button" id="history-button">History</button>
+    <img src="https://scontent.fmnl13-2.fna.fbcdn.net/v/t1.15752-9/462545363_875944664741358_1120148205063585882_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHvspYMgmxjaeEBmMyFR8u6sc8NyP514Fyxzw3I_nXgXELzGY-h6PakwuGDGz5OiZXx4kRacnyIrJ5Ib011C3M-&_nc_ohc=hYcgwTAyfp4Q7kNvgG47CKg&_nc_zt=23&_nc_ht=scontent.fmnl13-2.fna&oh=03_Q7cD1QF3Tm3ts1a1zt52Eg8pedbZbUGLZs5J2U1JLglRBO4Cmg&oe=67647B3A" alt="Profile Picture" class="profile-picture">
+    <div class="container">
+        <div class="text-box" id="box-1">
+            <div id="name-display" style="font-size: 24px; font-weight: bold; color: #ff6f91; margin-bottom: 10px;"></div>
+            <textarea class="big-text-input" id="message-input" placeholder="Type your message here..."></textarea>
+            <button class="select-button" id="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="warning-box" id="warning-box">
+        <h2>Warning!</h2>
+        <p>You must type your message before clicking Send!</p>
+        <button id="close-warning">Close</button>
+    </div>
+
+    <div class="success-box" id="success-box">
+        <h2>Success!</h2>
+        <p>Your message has been sent successfully.</p>
+        <button id="close-success">Close</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+
+        if (name) {
+            const nameDisplay = document.getElementById('name-display');
+            nameDisplay.textContent = `Hello, ${name}!`;
+        }
+
+        const sendButton = document.getElementById('send-button');
+        const warningBox = document.getElementById('warning-box');
+        const successBox = document.getElementById('success-box');
+        const closeWarningButton = document.getElementById('close-warning');
+        const closeSuccessButton = document.getElementById('close-success');
+        const messageInput = document.getElementById('message-input');
+        const historyButton = document.getElementById('history-button');
+
+        sendButton.addEventListener('click', function() {
+            if (messageInput.value.trim() === '') {
+                warningBox.style.display = 'block';
+            } else {
+                let messages = JSON.parse(localStorage.getItem('messages')) || [];
+                messages.push({ name: name, message: messageInput.value.trim() });
+                localStorage.setItem('messages', JSON.stringify(messages));
+
+                successBox.style.display = 'block';
+                messageInput.value = '';
+            }
+        });
+
+        closeWarningButton.addEventListener('click', function() {
+            warningBox.style.display = 'none';
+        });
+
+        closeSuccessButton.addEventListener('click', function() {
+            successBox.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === warningBox) {
+                warningBox.style.display = 'none';
+            }
+            if (event.target === successBox) {
+                successBox.style.display = 'none';
+            }
+        });
+
+        historyButton.addEventListener('click', function() {
+            window.location.href = 'history.html?name=' + encodeURIComponent(name);
+        });
+    </script>
+</body>
+</html>
